@@ -8,7 +8,16 @@ const db = require('./config/db');
 const courseRoutes = require('./routes/courseRoutes');
 const studentRoutes = require('./routes/studentRoutes');
 
+const requestTimer = require("./middlewares/requestTimer");
+const { swaggerSpec, swaggerUi } = require("./config/swagger");
+
+
 const app = express();
+
+app.use(requestTimer);
+app.use(express.json());
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 async function startServer() {
   try {
