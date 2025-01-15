@@ -3,6 +3,9 @@
 // Question: Quelles sont les bonnes pratiques pour les clés Redis ?
 // Réponse :
 
+
+const { getRedisClient } = require("../config/db");
+
 // Fonctions utilitaires pour Redis
 async function cacheData(key, data, ttl) {
     // TODO: Implémenter une fonction générique de cache

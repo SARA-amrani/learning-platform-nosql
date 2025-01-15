@@ -80,38 +80,38 @@ npm install
 
 3. Démarrer les services nécessaires
 
-Base de données MongoDB : mongod
+Base de données MongoDB : mongodb
 Serveur Redis : redis-server
 
 Structure du projet
-Le projet est organisé de manière modulaire pour faciliter la lisibilité, la maintenance et l'évolutivité. Voici une vue d'ensemble de la structure :
+Le projet est organisé de manière claire pour faciliter la lisibilité et la maintenance.
 
-src/config :
+#  Voici une vue d'ensemble de l'architecture de projet :
 
-db.js : Contient la logique pour se connecter à la base MongoDB et Redis.
+1. src/config :
 
-env.js : Gère le chargement des variables d'environnement à partir du fichier .env.
+db.js : Contient la logique pour se connecter aux bases de donnees NoSql :  MongoDB et Redis.
 
-src/controllers :
+env.js : Gère le chargement des variables d'environnement à partir du fichier .env  (ces variales sont les donner sensible qu on veut pas les afficher 'dans inspecter par exemple').
 
-courseController.js : Gère la logique métier pour les cours, comme la création,la modification et la suppression.
+2. src/controllers :
 
-src/routes :
+courseController.js : Gère la logique métier des cours: creer un cour ,modifier et supprimer.
 
-courseRoutes.js : Définit les endpoints pour interagir avec les cours.
+3. src/routes :
 
-src/services :
+courseRoutes.js :  gérer les routes liées aux cours et définit les endpoints pour interagir avec les cours.
 
-mongoService.js : Fournit des fonctions pour interagir avec MongoDB.
+4. src/services :
 
-redisService.js : Fournit des fonctions pour utiliser Redis comme système de cache.
+mongoService.js : Fournit les fonctions pour interagir avec la base de donnee MongoDB.
 
-src/app.js : Point d'entrée principal qui initialise le serveur, configure les middlewares et monte les routes.
+redisService.js : Fournit les fonctions pour utiliser Redis comme système de cache.
 
-.env : Contient les informations sensibles (URI de la base de données, clés API, etc.) qui ne doivent pas être exposées dans le code source.
+5. src/app.js : Point d'entrée principal qui initialise le serveur, configure les middlewares et monte les routes.
 
-package.json : Décrit les dépendances nécessaires au projet et fournit des scripts pour le développement et le déploiement.
+6. .env : Contient les informations sensibles (URI de la base de données, clés API...) qui ne doivent pas être afficher dans le code source.
 
-Choix et Utilisation de Postman pour Tester l'API
-Le choix technique que j'ai effectué pour tester et interagir avec l'API est Postman. Cet outil est particulièrement adapté pour l'automatisation des tests d'API grâce à son interface graphique intuitive et à ses nombreuses fonctionnalités avancées. Il permet de simuler facilement des requêtes HTTP, d'inspecter les réponses et de vérifier la conformité des données retournées par l'API.
+7. package.json : Décrit les dépendances nécessaires au projet.
+
 

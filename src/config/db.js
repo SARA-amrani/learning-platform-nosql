@@ -16,7 +16,7 @@ async function connectMongo() {
     mongoClient = new MongoClient(config.MONGODB_URI);
 
     await mongoClient.connect(); // Connexion au serveur MongoDB
-    db = mongoClient.db(config.MONGODB_DB_NAME); // Selection de la base de données
+    db = mongoClient.db(config.MONGODB_DB_NAME); // Selection de la base de donnée
     console.log('Connexion MongoDB réussie');
 } catch (error) {
     console.error('Erreur de connexion à MongoDB :', error);
