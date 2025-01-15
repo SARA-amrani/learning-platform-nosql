@@ -71,7 +71,7 @@ Réponse : Les variables d'environnement permettent de séparer les informations
 
 1. Cloner le dépôt
 
-git clone https://github.com/salmaabakil/learning-platform-template
+git clone https://github.com/SARA-amrani/learning-platform-nosql
 cd learning-platform-template
 
 2. Installer les dépendances
