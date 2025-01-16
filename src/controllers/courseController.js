@@ -64,6 +64,35 @@ async function getAllCourses(req, res) {
   }
 }
 
+// modifier un cours
+async function updateCourse(req, res) {
+  try {
+    const { id } = req.params;
+    const { title, description, instructorId } = req.body;
+
+    if (!title && !description && !instructorId) {
+      return res.status(400).json({ message: 'Au moins un champ est requis pour la mise à jour.' });
+    }
+
+    const updatedFields = {};
+    if (title) updatedFields.title = title;
+    if (description) updatedFields.description = description;
+    if (instructorId) updatedFields.instructorId = instructorId;
+
+    const updatedCourse = await mongoService.updateOneById('courses', id, updatedFields);
+
+    if (!updatedCourse) {
+      return res.status(404).json({ message: 'Cours non trouvé.' });
+    }
+
+    return res.status(200).json({ message: 'Cours mis à jour avec succès.', updatedCourse });
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour du cours:', error);
+    return res.status(500).json({ message: 'Une erreur est survenue.' });
+  }
+}
+
+
 //pour supprimer un cours
 async function deleteCourse(req, res) {
   try {
@@ -90,5 +119,6 @@ module.exports = {
   createCourse,
   getCourse,
   getAllCourses,
+  updateCourse,
   deleteCourse,
 };

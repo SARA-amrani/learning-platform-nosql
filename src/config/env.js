@@ -3,8 +3,11 @@
 // Question: Que se passe-t-il si une variable requise est manquante ?
 // Réponse : 
 
-const dotenv = require('dotenv');
-dotenv.config();
+require('dotenv').config();
+const uri = process.env.MONGODB_URI;
+
+console.log(uri);
+
 
 const requiredEnvVars = [
   'MONGODB_URI',
@@ -14,9 +17,12 @@ const requiredEnvVars = [
 
 // Validation des variables d'environnement
 function validateEnv() {
-  // Si une variable manque, lever une erreur explicative
   requiredEnvVars.forEach((v) => {
-    if (!v || !process.env[v]) throw new Error(`${v} env variable is required`);
+    if (!process.env[v]) {
+      throw new Error(`${v} env variable is required`);
+    } else {
+      console.log(`${v}: ${process.env[v]}`); // Vérification de la variable
+    }
   });
 }
 

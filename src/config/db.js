@@ -13,10 +13,10 @@ let mongoClient, redisClient, db;
 async function connectMongo() {
   // TODO: Implémenter la connexion MongoDB
   try {
-    mongoClient = new MongoClient(config.MONGODB_URI);
+    mongoClient = new MongoClient(config.mongodb.uri);
 
     await mongoClient.connect(); // Connexion au serveur MongoDB
-    db = mongoClient.db(config.MONGODB_DB_NAME); // Selection de la base de donnée
+    db = mongoClient.db(config.mongodb.dbName); // Selection de la base de donnée
     console.log('Connexion MongoDB réussie');
 } catch (error) {
     console.error('Erreur de connexion à MongoDB :', error);
@@ -44,6 +44,13 @@ async function connectRedis() {
     process.exit(1);
 }
   
+}
+
+function getDb() {
+  if (!db) {
+    throw new Error("La base de données n'est pas encore initialisée.");
+  }
+  return db;
 }
 
 // Fermeture des connexions proprement à la fin du processus
@@ -76,6 +83,6 @@ module.exports = {
   // TODO: Exporter les clients et fonctions utiles
   connectMongo,
   connectRedis,
-  db,
+  getDb,
   redisClient,
 };

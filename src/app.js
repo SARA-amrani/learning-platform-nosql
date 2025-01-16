@@ -4,27 +4,36 @@
 const express = require('express');
 const config = require('./config/env');
 const db = require('./config/db');
+const { connectDB } = require('./config/db');
+
 
 const courseRoutes = require('./routes/courseRoutes');
-const studentRoutes = require('./routes/studentRoutes');
-
-const requestTimer = require("./middlewares/requestTimer");
-const { swaggerSpec, swaggerUi } = require("./config/swagger");
-
-
+//const studentRoutes = require('./routes/studentRoutes');
 const app = express();
 
-app.use(requestTimer);
+
+
+
+
 app.use(express.json());
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api/courses', courseRoutes);
 
 
 async function startServer() {
   try {
-    // TODO: Initialiser les connexions aux bases de données
-    // TODO: Configurer les middlewares Express
-    // TODO: Monter les routes
-    // TODO: Démarrer le serveur
+    // Initialisation les connexions aux bases de données
+    await db.connectMongo();
+    await db.connectRedis();
+
+    // Configuration les middlewares Express
+    app.use(express.json());
+
+    
+    // Démarrage de serveur
+    const port = config.port || 3000;
+    app.listen(port, () => {
+      console.log(`Start server with port ${port}`);
+    });
   } catch (error) {
     console.error('Failed to start server:', error);
     process.exit(1);
@@ -33,7 +42,18 @@ async function startServer() {
 
 // Gestion propre de l'arrêt
 process.on('SIGTERM', async () => {
-  // TODO: Implémenter la fermeture propre des connexions
+  // Implémentation de la fermeture propre des connexions
+  try {
+    console.log('Stopping server...');
+
+    await db.closeConnections();
+
+    process.exit(0);
+  } catch (error) {
+    console.error('Error stopping the server:', error);
+    process.exit(1);
+  }
 });
 
 startServer();
+module.exports = app;

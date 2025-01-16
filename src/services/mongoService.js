@@ -10,10 +10,11 @@ require('dotenv').config();
 
 const { getDb } = require('../config/db');
 
+
 function getCollection(collectionName) {
   const db = getDb();
   if (!db) {
-    throw new Error('La connexion à MongoDB n est pas initialisée.');
+    throw new Error('La connexion a MongoDB n est pas reussie.');
   }
   return db.collection(collectionName);
 }
@@ -53,6 +54,26 @@ async function createCourse(course) {
   } catch (error) {
     console.error('!!!!Erreur: la creation du cour pas reussie: ', error);
     throw error;
+  }
+}
+
+async function updateOneById(collectionName, id, updatedFields) {
+  try {
+    const objectId = new ObjectId(id);
+    const collection = getCollection(collectionName);
+    const result = await collection.updateOne(
+      { _id: objectId },
+      { $set: updatedFields }
+    );
+
+    if (result.matchedCount === 0) {
+      return null;
+    }
+
+    return await findOneById(collectionName, id);
+  } catch (error) {
+    console.error(`Erreur lors de la mise à jour dans ${collectionName}:`, error);
+    throw new Error('Erreur lors de la mise à jour des donnees');
   }
 }
 
@@ -97,6 +118,7 @@ module.exports = {
   findOneById,
   findOneByField,
   createCourse,
+  updateOneById,
   findAll,
   deleteOneById,
 };
