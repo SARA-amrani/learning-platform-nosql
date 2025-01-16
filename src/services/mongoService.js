@@ -21,7 +21,7 @@ function getCollection(collectionName) {
 // Fonctions utilitaires pour MongoDB
 async function findOneById(collection, id) {
   
-  // TODO: Implémenter une fonction générique de recherche par ID
+  // une fonction générique de recherche par ID
   try {
     const objectId = new ObjectId(id);
     const result = await db.collection(collection).findOne({ _id: objectId });
@@ -41,6 +41,8 @@ async function findOneByField(collectionName, query) {
   }
 }
 
+  // une fonction générique pour crree un cour
+
 async function createCourse(course) {
   try {
     const collection = getCollection('courses');
@@ -54,6 +56,9 @@ async function createCourse(course) {
   }
 }
 
+// une fonction générique pour recuperer tous les documents 
+// d'une collection MongoDB et les retourne sous forme de tableau
+
 async function findAll(collectionName) {
   try {
     const db = getDb(); 
@@ -65,6 +70,8 @@ async function findAll(collectionName) {
     throw new Error('Erreur dans la recuperation des donnees!!!!');
   }
 }
+
+// une fonction générique pour supprimer un cour
 
 async function deleteOneById(collectionName, id) {
   try {

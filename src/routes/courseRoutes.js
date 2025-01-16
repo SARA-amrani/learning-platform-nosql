@@ -11,5 +11,9 @@ const courseController = require('../controllers/courseController');
 router.post('/', courseController.createCourse);
 router.get('/:id', courseController.getCourse);
 router.get('/stats', courseController.getCourseStats);
+router.get('/', courseController.getAllCourses);
+router.delete('/:id', courseController.deleteCourse);
+
+
 
 module.exports = router;
