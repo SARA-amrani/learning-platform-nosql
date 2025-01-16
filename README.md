@@ -115,6 +115,42 @@ redisService.js : Fournit les fonctions pour utiliser Redis comme système de ca
 7. package.json : Décrit les dépendances nécessaires au projet.
 
 
-suite ...
+- `POST /api/courses`: Créer un nouveau cours
+- `GET /api/courses`: Récupérer tous les cours
+- `GET /api/courses/:id`: Récupérer un cours par son ID
+- `DELETE /api/courses/:id`: supprimer un cours par son ID
+
+# Lancement de mongoDb
+
+![alt text](mongo-1.png)
+
+
+# Lancement de serveur redis
+
+![alt text](redis.png)
+
+
+-> J'ai choisi Postman pour tester mon API car il offre une interface simple et intuitive, permettant de facilement envoyer différentes requêtes HTTP (GET, POST, PUT, DELETE).
+
+![alt text](postman.png)
+
+# POST
+
+![alt text](POST.png)
+
+# PUT
+
+![alt text](PUT.png)
+
+# GIt
+
+![alt text](GET.png)
+
+# DELETE
+
+![alt text](Delete.png)
+
+
+
 
 
